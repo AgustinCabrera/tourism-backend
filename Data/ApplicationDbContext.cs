@@ -1,20 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using tourismApp.Data;  
+using tourismApp.Models.Entities;
 
 public class ApplicationDbContext : DbContext
 {
-    public DbSet<Blog> Blogs { get; set; }
-
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }
+    public DbSet<User> User { get; set; }
+    public DbSet <Atraction> Atraction { get; set; }
+    public DbSet <Itinerary > Itinerary { get; set; }
+    public DbSet <Promotion> Promotion { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!optionsBuilder.IsConfigured)
-        {
-            optionsBuilder.UseNpgsql(@"Host=${DB_LOCALHOST};Database=${DB_NAME};Port={DB_PORT};Username=${DB_NAME};Password=${DB_PASSWORD};");
-        }
-    }
 }
 

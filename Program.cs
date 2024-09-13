@@ -1,15 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using tourismApp.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var host = Environment.GetEnvironmentVariable("DB_HOST");
-var database = Environment.GetEnvironmentVariable("DB_NAME");
-var port = Environment.GetEnvironmentVariable("DB_PORT");
-var username = Environment.GetEnvironmentVariable("DB_USER");
-var password= Environment.GetEnvironmentVariable("DB_PASSWORD");
-
-var connectionString = $"Host={host};Database={database};Port={port};Username={username};Password={password}";
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
