@@ -2,9 +2,9 @@
 {
     public class Itinerary
     {
-        public int ItineraryId { get; set; }
-        public Guid UserId { get; set; }
-        public int ItineraryID { get; set; }
+        public required int  UserId { get; set; }
+        public required int ItineraryID { get; set; }
+        public required int AtractionId { get; set; }
 
     }
 }
