@@ -2,13 +2,17 @@
 {
     public class Promotion
     {
-        public required int PromotionID { get; set; }
-        public required int AtractionId { get; set; }
-        public required string PromotionDescription { get; set; }
-        public required string PromotionType { get; set; }
-        public required string PromotionPricingStrategy { get; set; }
-        public required float PromotionCostOrDiscount { get; set; }
-        public required bool IsPromotionDeleted { get; set; }
+        public required int ID { get; set; }
+        public required string Description { get; set; }
+        public required string Type { get; set; }
+        public required string PricingStrategy { get; set; }
+        public required float Discount { get; set; }
+        public required DateTime StartDate { get; set; }
+        public required DateTime EndDate { get; set; }
+
+        
+
+        public required ICollection<ItineraryPromotion> ItineraryPromotions { get; set; }
 
     }
 }

@@ -10,8 +10,10 @@
         public required decimal UserAvailableTime {  get; set; }
         public required int UserPreferredAttractionTypeId { get; set; }
         public required bool IsUserAdmin { get; set; }
+        public required decimal UserBudget { get; set; }
 
 
+        public required ICollection<Itinerary> Itineraries { get; set; }
         
     }
 }
