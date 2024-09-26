@@ -22,12 +22,6 @@ if (!app.Environment.IsDevelopment())
 
 DotNetEnv.Env.Load();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
-});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
