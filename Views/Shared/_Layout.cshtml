@@ -9,41 +9,129 @@
     <link rel="stylesheet" href="~/tourismApp.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">tourismApp</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+   <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">tourismApp</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
+</header>
+
+
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
+         
+            <div class="jumbotron text-center bg-light mb-5">
+                <h1 class="display-4">Explore the World with tourismApp!</h1>
+                <p class="lead">Discover your next destination with personalized recommendations and itineraries.</p>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Plan your Trip</a>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img src="~/images/destination1.jpg" class="card-img-top" alt="Destination 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Beach Paradise</h5>
+                            <p class="card-text">Experience the most beautiful beaches with clear waters and golden sands.</p>
+                            <a href="#" class="btn btn-primary">Explore More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img src="~/images/destination2.jpg" class="card-img-top" alt="Destination 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Mountain Adventure</h5>
+                            <p class="card-text">Enjoy breathtaking views and thrilling outdoor activities in the mountains.</p>
+                            <a href="#" class="btn btn-primary">Discover Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img src="~/images/destination3.jpg" class="card-img-top" alt="Destination 3">
+                        <div class="card-body">
+                            <h5 class="card-title">City Escapade</h5>
+                            <p class="card-text">Explore vibrant cities, rich in culture, art, and nightlife.</p>
+                            <a href="#" class="btn btn-primary">See More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Choose Us Section -->
+            <section class="my-5">
+                <div class="text-center">
+                    <h2>Why Choose tourismApp?</h2>
+                    <p class="lead">We make travel planning simple and personalized.</p>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <div class="icon-box">
+                            <i class="fas fa-map-marked-alt fa-3x"></i>
+                            <h5>Personalized Itineraries</h5>
+                            <p>Get suggestions tailored to your preferences and location.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="icon-box">
+                            <i class="fas fa-plane-departure fa-3x"></i>
+                            <h5>Top Destinations</h5>
+                            <p>Explore hand-picked locations recommended by experts.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="icon-box">
+                            <i class="fas fa-hotel fa-3x"></i>
+                            <h5>Best Deals</h5>
+                            <p>Find the best travel deals for flights, hotels, and more.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            @RenderBody() <!-- Este es el punto donde se insertarán las vistas -->
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - tourismApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <!-- Pie de página -->
+    <footer class="bg-dark text-light py-4">
+        <div class="container text-center">
+            <p>&copy; 2024 - tourismApp. All Rights Reserved.</p>
+            <a class="text-light" href="#">Privacy Policy</a> | <a class="text-light" href="#">Terms of Service</a>
         </div>
     </footer>
+
+    <!-- Sección opcional para incluir scripts adicionales -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Scripts", required: false)  <!-- Aquí pueden insertarse scripts adicionales de las vistas hijas -->
 </body>
 </html>

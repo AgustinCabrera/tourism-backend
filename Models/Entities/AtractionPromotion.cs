@@ -3,7 +3,7 @@
     public class AtractionPromotion
     {
         public int AtractionID { get; set; }
-        public string AtractionName { get; set; }
+        public required string AtractionName { get; set; }
         public int PromotionID { get; set; }
 
     }

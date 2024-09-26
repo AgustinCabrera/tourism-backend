@@ -22,6 +22,13 @@ if (!app.Environment.IsDevelopment())
 
 DotNetEnv.Env.Load();
 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+});
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -38,7 +45,7 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<ApplicationDbContext>();
-    context.Database.EnsureCreated();  // Creará la base de datos si no existe
+    context.Database.EnsureCreated();  
 }
 
 app.Run();
