@@ -6,6 +6,9 @@ using tourismApp.Models.Entities;
 using tourismApp.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 
 namespace tourismApp.Controllers
 {
@@ -24,6 +27,7 @@ namespace tourismApp.Controllers
 		[HttpGet]
 		public IActionResult Login()
 		{
+			if (User.Identity!.IsAuthenticated) return RedirectToAction("Index", "Home");
 			return View();
 		}
 
@@ -37,18 +41,35 @@ namespace tourismApp.Controllers
 				return View(model);
 			}
 
-			var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+			var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
 
-			if (result.Succeeded)
+
+			List<Claim> claims = new List<Claim>()
 			{
-				return RedirectToAction("Index", "Home");
-			}
-			else
+				new Claim(ClaimTypes.Name,model.UserName)
+			};
+
+			ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+			AuthenticationProperties propieties = new AuthenticationProperties()
 			{
-				ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-				return View(model);
-			}
-		}
+				AllowRefresh = true,
+			};
+
+			await HttpContext.SignInAsync(
+				CookieAuthenticationDefaults.AuthenticationScheme,
+				new ClaimsPrincipal(claimsIdentity), propieties);
+
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return View(model);
+            }
+        }
 
 		// GET: Register
 		[HttpGet]
@@ -78,10 +99,10 @@ namespace tourismApp.Controllers
 			await _dbContext.AddAsync(user);
 			await _dbContext.SaveChangesAsync();
 
-			if (user.Id != 0)
-			{
-				return RedirectToAction("Login");
-			}
+			//if (user.Id != 0)
+			//{
+			//	return RedirectToAction("Login");
+			//}
 
 			ViewData["Message"] = "Couldn't create user.";
 			return View();

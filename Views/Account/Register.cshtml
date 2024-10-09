@@ -1,39 +1,61 @@
-﻿@model tourismApp.ViewModels.UserViewModel;
+﻿@model tourismApp.ViewModels.UserViewModel
 @{
-	Layout = null;
+    Layout = null;
 }
-<html>
-	<head>
-		<title> Register </title>
-		<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-	</head>
-	<body>
-		<div class= "row mt-s justify-content-center">
-			<div class="col-sm-4">
-				<div class="card">
-					<div class="card-header"> Register</div>
-					<div class="card-body">
-						<form asp-action="Register" asp-controller="Account" method="post">
-							<input class="form-control mb-3" type="text" placeholder="Name" required asp-for="UserName">Name</input>
-							<input class="form-control mb-3" type="text" placeholder="Email" required asp-for="UserEmail">Email</input>
-							<input class="form-control mb-3" type="password" placeholder="Password" required asp-for="UserPassword">Password</input>
-							<input class="form-control mb-3" type="password" placeholder="Confirm Password" required asp-for="UserPasswordConfirmed">Confirm Password</input>
-							<div class="d-grid gap-2 mb-3">
-								<button class="btn btn-primary" type="submit">Register</button>
-							</div>
-						@if(ViewData["Message"]!= null)
-						{
-							<div class="alert alert-danger" role="alert"> @ViewData["Message"]</div>
-						}
-					</form>
-					Already member? <a asp-controller="Account" asp-action="Login">login</a>
-					</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - tourismApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/tourismApp.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h3>Register</h3>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="Register" asp-controller="Account" method="post">
+                            <div class="mb-3">
+                                <label asp-for="UserName" class="form-label">Name</label>
+                                <input asp-for="UserName" class="form-control" type="text" placeholder="Name" required />
+                                <span asp-validation-for="UserName" class="text-danger"></span>
+                            </div>
 
-				</div>
-			</div>
+                            <div class="mb-3">
+                                <label asp-for="UserEmail" class="form-label">Email</label>
+                                <input asp-for="UserEmail" class="form-control" type="text" placeholder="Email" required />
+                                <span asp-validation-for="UserEmail" class="text-danger"></span>
+                            </div>
 
-		</div>
-	<script src="~/lib/jquery/dist/jquery.min.js"></script>
-	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+                            <div class="mb-3">
+                                <label asp-for="UserPassword" class="form-label">Password</label>
+                                <input asp-for="UserPassword" class="form-control" type="password" placeholder="Password" required />
+                                <span asp-validation-for="UserPassword" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="UserPasswordConfirmed" class="form-label">Confirm Password</label>
+                                <input asp-for="UserPasswordConfirmed" class="form-control" type="password" placeholder="Confirm Password" required />
+                                <span asp-validation-for="UserPasswordConfirmed" class="text-danger"></span>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">Register</button>
+                        </form>
+                        Already a member? <a asp-controller="Account" asp-action="Login">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

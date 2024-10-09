@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using tourismApp.Models.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
@@ -13,6 +15,14 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // Llama a la configuración base de Identity para asegurarse de que las entidades de Identity se configuren correctamente
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<ApplicationUser>(entity =>
+        {
+            entity.Property(e => e.Id).HasColumnType("uuid");
+        });
+
         // Configuración de relación muchos a muchos entre Itinerary y Attraction
         modelBuilder.Entity<ItineraryAtraction>()
             .HasKey(ia => new { ia.ItineraryId, ia.AtractionId });
@@ -40,7 +50,16 @@ public class ApplicationDbContext : DbContext
             .HasOne(ip => ip.Promotion)
             .WithMany(p => p.ItineraryPromotions)
             .HasForeignKey(ip => ip.PromotionId);
-    }
+
+        // Relación entre Itinerary y ApplicationUser
+        modelBuilder.Entity<Itinerary>()
+        .HasOne(i => i.User)
+        .WithMany()
+        .HasForeignKey(i => i.UserId)
+        .OnDelete(DeleteBehavior.Cascade); ;
+        }
+
+
 
 }
 

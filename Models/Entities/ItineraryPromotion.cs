@@ -2,7 +2,7 @@
 {
     public class ItineraryPromotion
     {
-        public int ItineraryId { get; set; }
+        public Guid ItineraryId { get; set; }
         public required Itinerary Itinerary { get; set; }
 
         public int PromotionId { get; set; }

@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations;
 public class LoginModel
 {
     [Required]
-    
+    public required string UserName { get; set; }
     [EmailAddress]
     public required string Email { get; set; }
 
