@@ -3,7 +3,7 @@
     public class Atraction
 
     {
-        public required int AtractionId{ get; set; }
+        public required Guid AtractionId{ get; set; }
         public required string Name { get; set; }
         public required string Description { get; set; }
         public required decimal Cost { get; set; }

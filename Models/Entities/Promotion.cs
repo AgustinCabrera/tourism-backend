@@ -2,7 +2,7 @@
 {
     public class Promotion
     {
-        public required int ID { get; set; }
+        public required Guid ID { get; set; }
         public required string Description { get; set; }
         public required string Type { get; set; }
         public required string PricingStrategy { get; set; }
