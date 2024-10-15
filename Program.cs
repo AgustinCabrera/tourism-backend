@@ -5,11 +5,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
 
-// Configura PostgreSQL como proveedor de base de datos
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
@@ -19,8 +17,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "Account/Login";
-        options.ExpireTimeSpan = TimeSpan.Zero; // cambiar despues en 20 minutos
+        options.LoginPath = "/Account/Login";
+        options.ExpireTimeSpan = TimeSpan.Zero; 
     });
 
 var app = builder.Build();

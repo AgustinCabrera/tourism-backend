@@ -1,4 +1,6 @@
-﻿namespace tourismApp.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace tourismApp.ViewModels
 {
     public class UserViewModel
     {
@@ -7,12 +9,16 @@
         public required string UserEmail { get; set; }
         public required bool UserEmailConfirmed { get; set; }
         public required string UserPassword { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        [Compare("UserPassword", ErrorMessage = "Passwords do not match.")]
         public required string UserPasswordConfirmed { get; set; }
         public required decimal UserGold { get; set; }
         public required decimal UserAvailableTime { get; set; }
         public required int UserPreferredAttractionTypeId { get; set; }
         public required bool IsUserAdmin { get; set; }
         public required decimal UserBudget { get; set; }
+
 
     }
 }

@@ -34,19 +34,19 @@ namespace tourismApp.Controllers
 		// POST: Login
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Login(LoginModel model)
+		public async Task<IActionResult> Login(LoginViewModel model)
 		{
 			if (!ModelState.IsValid)
 			{
 				return View(model);
 			}
 
-			var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
+			var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
 
 
 			List<Claim> claims = new List<Claim>()
 			{
-				new Claim(ClaimTypes.Name,model.UserName)
+				new Claim(ClaimTypes.Name,model.Email)
 			};
 
 			ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -83,10 +83,15 @@ namespace tourismApp.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Register(UserViewModel model)
 		{
+
+			if(!ModelState.IsValid) { 
+				return View(model); 
+			}
+
 			if (model.UserPassword != model.UserPasswordConfirmed)
 			{
-				ViewData["Message"] = "Passwords do not match.";
-				return View();
+				ModelState.AddModelError(string.Empty, "Passwords do not match.");
+				return View(model);
 			}
 
 			User user = new User
@@ -99,13 +104,7 @@ namespace tourismApp.Controllers
 			await _dbContext.AddAsync(user);
 			await _dbContext.SaveChangesAsync();
 
-			//if (user.Id != 0)
-			//{
-			//	return RedirectToAction("Login");
-			//}
-
-			ViewData["Message"] = "Couldn't create user.";
-			return View();
+			return RedirectToAction("Login");
 		}
 	}
 }
