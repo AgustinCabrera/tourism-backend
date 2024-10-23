@@ -73,7 +73,6 @@ namespace tourismApp.Controllers
 
 		// GET: Register
 		[HttpGet]
-        [ValidateAntiForgeryToken]
         [AllowAnonymous]
         public IActionResult Register()
 		{
