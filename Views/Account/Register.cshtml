@@ -23,6 +23,7 @@
                     <div class="card-body">
                         <div asp-validation-summary="All" class="text-danger"></div>
                         <form asp-action="Register" asp-controller="Account" method="post">
+                            @Html.AntiForgeryToken()
                             <div class="mb-3">
                                 <label asp-for="UserName" class="form-label">Name</label>
                                 <input asp-for="UserName" class="form-control" type="text" placeholder="Name" required />

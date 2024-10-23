@@ -38,4 +38,10 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\assets\beachParadise.jpg" />
+    <None Include="wwwroot\assets\cityEscapade.jpg" />
+    <None Include="wwwroot\assets\mountainAdventura.jpeg" />
+  </ItemGroup>
+
 </Project>

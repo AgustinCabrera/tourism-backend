@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace tourismApp.Controllers
 {
@@ -34,15 +35,14 @@ namespace tourismApp.Controllers
 		// POST: Login
 		[HttpPost]
 		[ValidateAntiForgeryToken]
+		[AllowAnonymous]
 		public async Task<IActionResult> Login(LoginViewModel model)
 		{
 			if (!ModelState.IsValid)
-			{
 				return View(model);
-			}
+			
 
 			var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-
 
 			List<Claim> claims = new List<Claim>()
 			{
@@ -73,7 +73,9 @@ namespace tourismApp.Controllers
 
 		// GET: Register
 		[HttpGet]
-		public IActionResult Register()
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public IActionResult Register()
 		{
 			return View();
 		}
@@ -81,7 +83,8 @@ namespace tourismApp.Controllers
 		// POST: Register
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Register(UserViewModel model)
+        //[AllowAnonymous]
+        public async Task<IActionResult> Register(UserViewModel model)
 		{
 
 			if(!ModelState.IsValid) { 
@@ -106,5 +109,36 @@ namespace tourismApp.Controllers
 
 			return RedirectToAction("Login");
 		}
-	}
+
+        [Authorize]
+        public IActionResult UserProfile()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult AdminPanel()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Account");
+        }
+
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
+       
+
+
+    }
+
 }
