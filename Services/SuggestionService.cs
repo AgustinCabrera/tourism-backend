@@ -74,7 +74,8 @@ namespace tourismApp.Services
                 EndDate = DateTime.Now.AddDays(1),
                 Status = "Created",
                 Description = "Your personalized itinerary",
-                ItineraryAtractions = attractions.Select(a => new ItineraryAtraction { AtractionId = a.AtractionId }).ToList()
+                ItineraryAtractions = attractions.Select(a => new ItineraryAtraction { AtractionId = a.AtractionId }).ToList(),
+                ItineraryPromotions = new List<ItineraryPromotion>()
             };
 
             _dbContext.Itinerary.Add(itinerary);
